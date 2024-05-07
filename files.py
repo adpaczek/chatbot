@@ -36,6 +36,6 @@ def copy_specific_files(source_folder, destination_folder, file_format):
 # extract_files(srt_zip_path, srt_unpacked_path)
 # extract_files(sub_zip_path, sub_unpacked_path)
 
-copy_specific_files(srt_unpacked_path, srt_files_path, srt_format)
+# copy_specific_files(srt_unpacked_path, srt_files_path, srt_format)
 # copy_specific_files(sub_unpacked_path, sub_files_path, sub_format)
 # copy_specific_files(sub_unpacked_path, sub_files_path, sub_format2)
