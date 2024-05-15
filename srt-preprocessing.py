@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import os
 import re
 
@@ -17,6 +16,12 @@ def process_srt_file(srt_file, skip_lines=10, max_time_gap=6.4):
     # Remove tags <i>, <b>, <u>, <font>, <color> etc.
     lines = [re.sub(r'<[^>]+>', '', line) for line in lines]
 
+    # Remove lines that are stage directions
+    lines = [re.sub(r'\[.*\]', '', line) for line in lines]
+
+    # Remove lines that are not conversation lines or time frames
+    lines = [line for line in lines if not re.match(r'^\d+\s*$', line)]
+
     movie_conversations = []
     current_conversation = ""
     last_end_time = ""
@@ -34,10 +39,11 @@ def process_srt_file(srt_file, skip_lines=10, max_time_gap=6.4):
                     current_conversation = ""
             last_end_time = times[1]
         else:
-            if line.startswith(tuple('.abcćdefghijklłmnopqrsśtuvwxyzżź')):
-                current_conversation += " " + line
-            else:
-                current_conversation += "|=|" + line
+            if line.strip() and not (line.strip() == "-" or line.strip() == " " or line.strip() == " -"):
+                if line.startswith(tuple('.abcćdefghijklłmnopqrsśtuvwxyzżź')):
+                    current_conversation += " " + line
+                else:
+                    current_conversation += "|=|" + line
 
     if current_conversation:
         movie_conversations.append(current_conversation.strip())

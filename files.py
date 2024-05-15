@@ -3,7 +3,7 @@ import zipfile
 import shutil
 import os
 
-srt_zip_path = Path('./datasets/srt/zip')
+srt_zip_path = Path('./datasets/srt/zip/good')
 srt_unpacked_path = Path('./datasets/srt/unpacked')
 srt_files_path = Path('./datasets/srt/files')
 srt_format = ".srt"
@@ -33,9 +33,9 @@ def copy_specific_files(source_folder, destination_folder, file_format):
                 shutil.copy(source_file_path, destination_file_path)
 
 
-# extract_files(srt_zip_path, srt_unpacked_path)
-# extract_files(sub_zip_path, sub_unpacked_path)
+#extract_files(srt_zip_path, srt_unpacked_path)
+#extract_files(sub_zip_path, sub_unpacked_path)
 
-# copy_specific_files(srt_unpacked_path, srt_files_path, srt_format)
-# copy_specific_files(sub_unpacked_path, sub_files_path, sub_format)
-# copy_specific_files(sub_unpacked_path, sub_files_path, sub_format2)
+copy_specific_files(srt_unpacked_path, srt_files_path, srt_format)
+#copy_specific_files(sub_unpacked_path, sub_files_path, sub_format)
+#copy_specific_files(sub_unpacked_path, sub_files_path, sub_format2)

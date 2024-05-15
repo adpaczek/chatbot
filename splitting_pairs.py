@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import re
 
 
@@ -29,10 +30,11 @@ def load_conversations(conversation_file_path):
     return inputs, outputs
 
 
-srt_path = './datasets/srt/srt-conversations.txt'
+srt_path = 'datasets/srt/srt-conversations.txt'
 sub_path = './datasets/sub/sub-conversations.txt'
 
 
 questions, answers = load_conversations(srt_path)
-print(questions[8846])
-print(answers[8846])
+
+print(len(questions))
+print(len(answers))
