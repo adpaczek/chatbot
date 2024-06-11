@@ -23,13 +23,21 @@ MAX_LENGTH = 50
 
 def preprocess_sentence(sentence):
     sentence = sentence.lower().strip()
-    # Creating a space between a word and the punctuation following it
+    # reating a space between a word and the punctuation following it
     sentence = re.sub(r"([?.!,])", r" \1 ", sentence)
     sentence = re.sub(r'[" "]+', " ", sentence)
 
-    # Replacing everything with space except (a-z, A-Z, ".", "?", "!", ",")
+    # replacing everything with space except (a-z, A-Z, ".", "?", "!", ",")
     sentence = re.sub(r"[^a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ0-9?.!,]+", " ", sentence)
     sentence = sentence.strip()
+    return sentence
+
+
+def postprocess_sentence(sentence):
+    # capitalize the first letter
+    sentence = sentence.capitalize()
+    # remove spaces before punctuation
+    sentence = re.sub(r'\s([?.!,])', r'\1', sentence)
     return sentence
 
 
@@ -73,6 +81,7 @@ def predict():
     predicted_sentence = tokenizer.decode(
         [i for i in prediction if i < tokenizer.vocab_size]
     )
+    predicted_sentence = postprocess_sentence(predicted_sentence)
     return jsonify({'reply': predicted_sentence})
 
 

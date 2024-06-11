@@ -41,10 +41,13 @@ def load_conversations(conversation_file_path):
     return inputs, outputs
 
 
-srt_path = 'datasets/srt/srt-conversations.txt'
-sub_path = './datasets/sub/sub-conversations.txt'
+srt_path = './datasets/srt/srt-conversations-final.txt'
+sub_path = './datasets/sub/sub-conversations-update.txt'
 
 questions, answers = load_conversations(srt_path)
 
-save_data(questions, 'pairs/questions.pkl')
-save_data(answers, 'pairs/answers.pkl')
+save_data(questions, '../pairs/questions-final.pkl')
+save_data(answers, '../pairs/answers-final.pkl')
+
+print(len(questions))
+print(len(answers))

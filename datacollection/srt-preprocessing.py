@@ -2,7 +2,7 @@ import os
 import re
 
 
-def process_srt_file(srt_file, skip_lines=10, max_time_gap=4):
+def process_srt_file(srt_file, skip_lines=15, max_time_gap=3.0):
     try:
         # Whole .srt file preprocessing to conversation pairs
         with open(srt_file, 'r', encoding='utf-8') as file:
@@ -12,7 +12,7 @@ def process_srt_file(srt_file, skip_lines=10, max_time_gap=4):
         return None  # Return None to indicate an error
 
     # Remove first and last lines to avoid unnecessary information (e.g. about author)
-    lines = [line.strip() for line in lines[skip_lines:-20] if line.strip()]
+    lines = [line.strip() for line in lines[skip_lines:-30] if line.strip()]
 
     # Remove lines that are not conversation lines or time frames
     lines = [line for line in lines if not re.match(r'^\d+\s*$', line)]
@@ -76,7 +76,7 @@ def save_conversations_to_file(conversation_pairs, output_file):
 
 if __name__ == "__main__":
     folder_path = "./datasets/srt/files/"
-    final_file = "datasets/srt/srt-conversations.txt"
+    final_file = "datasets/srt/srt-conversations-final.txt"
 
     for filename in os.listdir(folder_path):
         if filename.endswith(".srt"):

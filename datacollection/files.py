@@ -3,7 +3,7 @@ import zipfile
 import shutil
 import os
 
-srt_zip_path = Path('./datasets/srt/zip/good')
+srt_zip_path = Path('./datasets/srt/zip/new')
 srt_unpacked_path = Path('./datasets/srt/unpacked')
 srt_files_path = Path('./datasets/srt/files')
 srt_format = ".srt"

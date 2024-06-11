@@ -1,6 +1,6 @@
 import tensorflow as tf
 import tensorflow_datasets as tfds
-from splitting_pairs import load_data
+from datacollection.splitting_pairs import load_data
 
 #print(len(questions))
 #print(len(answers))
