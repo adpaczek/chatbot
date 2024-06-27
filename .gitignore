@@ -3,6 +3,6 @@ venv
 *.pyc
 datacollection/datasets
 key.txt
-test.ipynb
-spacy_testing.py
 __pycache__/
+models/model-v1.h5
+models/model-v2.h5

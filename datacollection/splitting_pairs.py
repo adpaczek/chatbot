@@ -15,11 +15,11 @@ def load_data(filename):
 
 def preprocess_sentence(sentence):
     sentence = sentence.lower().strip()
-    # Creating a space between a word and the punctuation following it
+    # creating a space between a word and the punctuation following it
     sentence = re.sub(r"([?.!,])", r" \1 ", sentence)
     sentence = re.sub(r'[" "]+', " ", sentence)
 
-    # Replacing everything with space except (a-z, A-Z, ".", "?", "!", ",")
+    # replacing everything with space except (a-z, A-Z, ".", "?", "!", ",")
     sentence = re.sub(r"[^a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ0-9?.!,]+", " ", sentence)
     sentence = sentence.strip()
     return sentence
@@ -41,13 +41,12 @@ def load_conversations(conversation_file_path):
     return inputs, outputs
 
 
-srt_path = './datasets/srt/srt-conversations-final.txt'
-sub_path = './datasets/sub/sub-conversations-update.txt'
+srt_path = './datasets/srt/srt-conversations-new.txt'
 
 questions, answers = load_conversations(srt_path)
 
-save_data(questions, '../pairs/questions-final.pkl')
-save_data(answers, '../pairs/answers-final.pkl')
+save_data(questions, '../pairs/questions-new.pkl')
+save_data(answers, '../pairs/answers-new.pkl')
 
 print(len(questions))
 print(len(answers))

@@ -8,7 +8,7 @@ import re, pickle
 app = Flask(__name__)
 
 model = tf.keras.models.load_model(
-    "./models/model20.h5",
+    "./models/model-v3.h5",
     custom_objects={
         "PositionalEncoding": PositionalEncoding,
         "MultiHeadAttentionLayer": MultiHeadAttentionLayer,
@@ -16,7 +16,7 @@ model = tf.keras.models.load_model(
     compile=False,
 )
 
-tokenizer = tfds.deprecated.text.SubwordTextEncoder.load_from_file('tokenizer_file')
+tokenizer = tfds.deprecated.text.SubwordTextEncoder.load_from_file('tokenizer_v3')
 START_TOKEN, END_TOKEN = [tokenizer.vocab_size], [tokenizer.vocab_size + 1]
 VOCAB_SIZE = tokenizer.vocab_size + 2
 MAX_LENGTH = 50
@@ -53,16 +53,12 @@ def evaluate(sentence):
     for i in range(MAX_LENGTH):
         predictions = model(inputs=[sentence, output], training=False)
 
-        # select the last word from the seq_len dimension
         predictions = predictions[:, -1:, :]
         predicted_id = tf.cast(tf.argmax(predictions, axis=-1), tf.int32)
 
-        # return the result if the predicted_id is equal to the end token
         if tf.equal(predicted_id, END_TOKEN[0]):
             break
 
-        # concatenated the predicted_id to the output which is given to the decoder
-        # as its input.
         output = tf.concat([output, predicted_id], axis=-1)
 
     return tf.squeeze(output, axis=0)

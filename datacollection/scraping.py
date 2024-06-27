@@ -17,7 +17,7 @@ def get_soup(url):
 
 for tr_class in TR_CLASSES:
     for tr_tag in get_soup(URL).find_all('tr', class_=tr_class):
-        # Find the <a> tag with the specific class and extract the text
+        # find the <a> tag with the specific class and extract the text
         text = tr_tag.find('a', class_=TEXT_CLASS).text.strip()
         name = re.sub(r'[^\w\s]', '', text).replace(' ', '')
         name = name.replace("\n", "")
